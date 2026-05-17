@@ -22,12 +22,16 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y live-build xorriso
+          sudo apt-get install -y live-build xorriso debian-archive-keyring
 
       - name: lb config
         run: |
           sudo lb config \
-            --distribution bookworm \
+            --distribution sid \
+            --mirror-bootstrap http://deb.debian.org/debian \
+            --mirror-chroot http://deb.debian.org/debian \
+            --mirror-chroot-security none \
+            --mirror-binary http://deb.debian.org/debian \
             --archive-areas "main contrib non-free non-free-firmware" \
             --debian-installer live \
             --debian-installer-preseed preseed/voidshift.cfg \
