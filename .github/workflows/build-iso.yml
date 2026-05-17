@@ -12,6 +12,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: debian:sid
+      options: --privileged
+
     permissions:
       contents: write
 
@@ -21,19 +25,18 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y live-build xorriso debian-archive-keyring
+          apt-get update -qq
+          apt-get install -y live-build xorriso debian-archive-keyring git
 
       - name: lb config
         run: |
-          sudo lb config \
+          lb config \
             --distribution sid \
             --mirror-bootstrap http://deb.debian.org/debian \
             --mirror-chroot http://deb.debian.org/debian \
             --mirror-chroot-security none \
             --mirror-binary http://deb.debian.org/debian \
             --archive-areas "main contrib non-free non-free-firmware" \
-            --firmware-chroot false \
             --debian-installer live \
             --debian-installer-preseed preseed/voidshift.cfg \
             --bootappend-live "boot=live components hostname=voidshift username=user" \
@@ -45,7 +48,7 @@ jobs:
         run: chmod +x config/hooks/live/0001-branding.hook.chroot
 
       - name: Build
-        run: sudo lb build 2>&1 | tee build.log
+        run: lb build 2>&1 | tee build.log
 
       - name: Rename ISO
         run: mv $(ls *.iso | head -1) voidshift-1.0-amd64.iso
