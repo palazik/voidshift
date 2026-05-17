@@ -33,6 +33,7 @@ jobs:
             --mirror-chroot-security none \
             --mirror-binary http://deb.debian.org/debian \
             --archive-areas "main contrib non-free non-free-firmware" \
+            --firmware-chroot false \
             --debian-installer live \
             --debian-installer-preseed preseed/voidshift.cfg \
             --bootappend-live "boot=live components hostname=voidshift username=user" \
