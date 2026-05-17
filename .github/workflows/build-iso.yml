@@ -1,0 +1,69 @@
+name: Build ISO
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Release tag (e.g. v1.0)"
+        required: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y live-build xorriso
+
+      - name: lb config
+        run: |
+          sudo lb config \
+            --distribution bookworm \
+            --archive-areas "main contrib non-free non-free-firmware" \
+            --debian-installer live \
+            --debian-installer-preseed preseed/voidshift.cfg \
+            --bootappend-live "boot=live components hostname=voidshift username=user" \
+            --iso-volume "VoidShift 1.0" \
+            --iso-publisher "VoidShift Project" \
+            --iso-application "VoidShift Linux"
+
+      - name: Fix hook permissions
+        run: chmod +x config/hooks/live/0001-branding.hook.chroot
+
+      - name: Build
+        run: sudo lb build 2>&1 | tee build.log
+
+      - name: Rename ISO
+        run: mv $(ls *.iso | head -1) voidshift-1.0-amd64.iso
+
+      - name: Upload ISO
+        uses: actions/upload-artifact@v4
+        with:
+          name: voidshift-iso
+          path: voidshift-1.0-amd64.iso
+          retention-days: 7
+
+      - name: Upload log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-log
+          path: build.log
+          retention-days: 7
+
+      - name: Release
+        if: github.event.inputs.release_tag != ''
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event.inputs.release_tag }}
+          name: "VoidShift ${{ github.event.inputs.release_tag }}"
+          files: voidshift-1.0-amd64.iso

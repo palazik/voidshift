@@ -1,0 +1,9 @@
+NAME="VoidShift"
+PRETTY_NAME="VoidShift Linux 1.0"
+ID=voidshift
+ID_LIKE=debian
+VERSION="1.0 (core)"
+VERSION_ID="1.0"
+VERSION_CODENAME=core
+HOME_URL="https://github.com/palazik/voidshift"
+BUG_REPORT_URL="https://github.com/palazik/voidshift/issues"

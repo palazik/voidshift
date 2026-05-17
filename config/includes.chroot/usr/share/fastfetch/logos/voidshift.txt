@@ -1,0 +1,19 @@
+$1                                              
+$1VVVVVVVV           VVVVVVVV   $2SSSSSSSSSSSSSSS 
+$1V::::::V           V::::::V $2SS:::::::::::::::S
+$1V::::::V           V::::::V$2S:::::SSSSSS::::::S
+$1V::::::V           V::::::V$2S:::::S     SSSSSSS
+$1 V:::::V           V:::::V $2S:::::S            
+$1  V:::::V         V:::::V  $2S:::::S            
+$1   V:::::V       V:::::V   $2 S::::SSSS         
+$1    V:::::V     V:::::V    $2  SS::::::SSSSS    
+$1     V:::::V   V:::::V     $2    SSS::::::::SS  
+$1      V:::::V V:::::V      $2       SSSSSS::::S 
+$1       V:::::V:::::V       $2            S:::::S
+$1        V:::::::::V        $2            S:::::S
+$1         V:::::::V         $2SSSSSSS     S:::::S
+$1          V:::::V          $2S::::::SSSSSS:::::S
+$1           V:::V           $2S:::::::::::::::SS 
+$1            VVV            $2 SSSSSSSSSSSSSSS   
+$1                                              
+$1
