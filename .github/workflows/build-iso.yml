@@ -38,7 +38,6 @@ jobs:
             --mirror-binary http://deb.debian.org/debian \
             --archive-areas "main contrib non-free non-free-firmware" \
             --debian-installer live \
-            --debian-installer-preseed preseed/voidshift.cfg \
             --bootappend-live "boot=live components hostname=voidshift username=user" \
             --iso-volume "VoidShift 1.0" \
             --iso-publisher "VoidShift Project" \
