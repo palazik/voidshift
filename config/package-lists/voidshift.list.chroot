@@ -1,5 +1,6 @@
 linux-image-amd64
 linux-headers-amd64
+e2fsprogs
 network-manager
 curl
 git
